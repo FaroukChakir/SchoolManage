@@ -21,15 +21,10 @@ namespace SchoolManagement
         }
     
         public int id_seance { get; set; }
-        public System.DateTime date_se { get; set; }
-        public System.DateTime heure_debut { get; set; }
-        public int id_groupe { get; set; }
-        public string id_prof { get; set; }
-        public System.DateTime heure_fin { get; set; }
+        public int heure_debut { get; set; }
+        public int heure_fin { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Absence> Absence { get; set; }
-        public virtual Groupe Groupe { get; set; }
-        public virtual Prof Prof { get; set; }
     }
 }

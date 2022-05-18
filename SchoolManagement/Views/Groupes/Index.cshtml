@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SchoolManagement.Groupe>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.number_group)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Filiere.name_filiere)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.number_group)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Filiere.name_filiere)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_groupe }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_groupe }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_groupe })
+        </td>
+    </tr>
+}
+
+</table>

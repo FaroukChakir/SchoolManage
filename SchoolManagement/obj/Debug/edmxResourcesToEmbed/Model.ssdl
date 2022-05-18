@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ecoleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Absence">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id_etudiant" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_seance" Type="int" Nullable="false" />
+    <Property Name="DateAbsence" Type="datetime" />
+  </EntityType>
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="CNE" />
+    </Key>
+    <Property Name="CNE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Etudiant">
+    <Key>
+      <PropertyRef Name="CNE" />
+    </Key>
+    <Property Name="CNE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_group" Type="int" Nullable="false" />
+    <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="CNE_prof" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="date_exam" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Filiere">
+    <Key>
+      <PropertyRef Name="id_filiere" />
+    </Key>
+    <Property Name="id_filiere" Type="int" Nullable="false" />
+    <Property Name="name_filiere" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groupe">
+    <Key>
+      <PropertyRef Name="id_groupe" />
+    </Key>
+    <Property Name="id_groupe" Type="int" Nullable="false" />
+    <Property Name="id_filiere" Type="int" Nullable="false" />
+    <Property Name="number_group" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="matiere">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="note">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id_exam" Type="int" Nullable="false" />
+    <Property Name="id_etudiant" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="note_exam" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prof">
+    <Key>
+      <PropertyRef Name="CNE" />
+    </Key>
+    <Property Name="CNE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_matiere" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="adresse" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tel" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="seance">
+    <Key>
+      <PropertyRef Name="id_seance" />
+    </Key>
+    <Property Name="id_seance" Type="int" Nullable="false" />
+    <Property Name="heure_debut" Type="int" Nullable="false" />
+    <Property Name="heure_fin" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Absence_Etudiant">
+    <End Role="Etudiant" Type="Self.Etudiant" Multiplicity="1" />
+    <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etudiant">
+        <PropertyRef Name="CNE" />
+      </Principal>
+      <Dependent Role="Absence">
+        <PropertyRef Name="id_etudiant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Absence_seance">
+    <End Role="seance" Type="Self.seance" Multiplicity="1" />
+    <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seance">
+        <PropertyRef Name="id_seance" />
+      </Principal>
+      <Dependent Role="Absence">
+        <PropertyRef Name="id_seance" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Etudiant_Groupe">
+    <End Role="Groupe" Type="Self.Groupe" Multiplicity="1" />
+    <End Role="Etudiant" Type="Self.Etudiant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groupe">
+        <PropertyRef Name="id_groupe" />
+      </Principal>
+      <Dependent Role="Etudiant">
+        <PropertyRef Name="id_group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Exam_Prof">
+    <End Role="Prof" Type="Self.Prof" Multiplicity="1" />
+    <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prof">
+        <PropertyRef Name="CNE" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="CNE_prof" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groupe_Filiere">
+    <End Role="Filiere" Type="Self.Filiere" Multiplicity="1" />
+    <End Role="Groupe" Type="Self.Groupe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filiere">
+        <PropertyRef Name="id_filiere" />
+      </Principal>
+      <Dependent Role="Groupe">
+        <PropertyRef Name="id_filiere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_note_Etudiant">
+    <End Role="Etudiant" Type="Self.Etudiant" Multiplicity="1" />
+    <End Role="note" Type="Self.note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etudiant">
+        <PropertyRef Name="CNE" />
+      </Principal>
+      <Dependent Role="note">
+        <PropertyRef Name="id_etudiant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_note_Etudiant1">
+    <End Role="Etudiant" Type="Self.Etudiant" Multiplicity="1" />
+    <End Role="note" Type="Self.note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etudiant">
+        <PropertyRef Name="CNE" />
+      </Principal>
+      <Dependent Role="note">
+        <PropertyRef Name="id_etudiant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_note_Exam">
+    <End Role="Exam" Type="Self.Exam" Multiplicity="1" />
+    <End Role="note" Type="Self.note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="note">
+        <PropertyRef Name="id_exam" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Prof_matiere">
+    <End Role="matiere" Type="Self.matiere" Multiplicity="1" />
+    <End Role="Prof" Type="Self.Prof" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="matiere">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Prof">
+        <PropertyRef Name="id_matiere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ecoleModelStoreContainer">
+    <EntitySet Name="Absence" EntityType="Self.Absence" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Etudiant" EntityType="Self.Etudiant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Filiere" EntityType="Self.Filiere" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groupe" EntityType="Self.Groupe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="matiere" EntityType="Self.matiere" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="note" EntityType="Self.note" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prof" EntityType="Self.Prof" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="seance" EntityType="Self.seance" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Absence_Etudiant" Association="Self.FK_Absence_Etudiant">
+      <End Role="Etudiant" EntitySet="Etudiant" />
+      <End Role="Absence" EntitySet="Absence" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Absence_seance" Association="Self.FK_Absence_seance">
+      <End Role="seance" EntitySet="seance" />
+      <End Role="Absence" EntitySet="Absence" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Etudiant_Groupe" Association="Self.FK_Etudiant_Groupe">
+      <End Role="Groupe" EntitySet="Groupe" />
+      <End Role="Etudiant" EntitySet="Etudiant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Exam_Prof" Association="Self.FK_Exam_Prof">
+      <End Role="Prof" EntitySet="Prof" />
+      <End Role="Exam" EntitySet="Exam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groupe_Filiere" Association="Self.FK_Groupe_Filiere">
+      <End Role="Filiere" EntitySet="Filiere" />
+      <End Role="Groupe" EntitySet="Groupe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_note_Etudiant" Association="Self.FK_note_Etudiant">
+      <End Role="Etudiant" EntitySet="Etudiant" />
+      <End Role="note" EntitySet="note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_note_Etudiant1" Association="Self.FK_note_Etudiant1">
+      <End Role="Etudiant" EntitySet="Etudiant" />
+      <End Role="note" EntitySet="note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_note_Exam" Association="Self.FK_note_Exam">
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="note" EntitySet="note" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Prof_matiere" Association="Self.FK_Prof_matiere">
+      <End Role="matiere" EntitySet="matiere" />
+      <End Role="Prof" EntitySet="Prof" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

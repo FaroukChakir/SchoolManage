@@ -18,7 +18,6 @@ namespace SchoolManagement
         public Groupe()
         {
             this.Etudiant = new HashSet<Etudiant>();
-            this.seance = new HashSet<seance>();
         }
     
         public int id_groupe { get; set; }
@@ -28,7 +27,5 @@ namespace SchoolManagement
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Etudiant> Etudiant { get; set; }
         public virtual Filiere Filiere { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<seance> seance { get; set; }
     }
 }

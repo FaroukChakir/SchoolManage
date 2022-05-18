@@ -18,7 +18,6 @@ namespace SchoolManagement
         public Prof()
         {
             this.Exam = new HashSet<Exam>();
-            this.seance = new HashSet<seance>();
         }
     
         public string CNE { get; set; }
@@ -33,7 +32,5 @@ namespace SchoolManagement
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exam> Exam { get; set; }
         public virtual matiere matiere { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<seance> seance { get; set; }
     }
 }

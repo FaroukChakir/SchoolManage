@@ -17,8 +17,8 @@ namespace SchoolManagement.Controllers
         // GET: seances
         public ActionResult Index()
         {
-            var seance = db.seance.Include(s => s.Groupe).Include(s => s.Prof);
-            return View(seance.ToList());
+
+            return View(db.seance.ToList());
         }
 
         // GET: seances/Details/5
@@ -39,8 +39,7 @@ namespace SchoolManagement.Controllers
         // GET: seances/Create
         public ActionResult Create()
         {
-            ViewBag.id_groupe = new SelectList(db.Groupe, "id_groupe", "id_groupe");
-            ViewBag.id_prof = new SelectList(db.Prof, "CNE", "name");
+           
             return View();
         }
 
@@ -49,7 +48,7 @@ namespace SchoolManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_seance,date_se,heure_debut,id_groupe,id_prof,heure_fin")] seance seance)
+        public ActionResult Create([Bind(Include = "id_seance,heure_debut,heure_fin")] seance seance)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +57,7 @@ namespace SchoolManagement.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_groupe = new SelectList(db.Groupe, "id_groupe", "id_groupe", seance.id_groupe);
-            ViewBag.id_prof = new SelectList(db.Prof, "CNE", "name", seance.id_prof);
+         
             return View(seance);
         }
 
@@ -75,8 +73,7 @@ namespace SchoolManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_groupe = new SelectList(db.Groupe, "id_groupe", "id_groupe", seance.id_groupe);
-            ViewBag.id_prof = new SelectList(db.Prof, "CNE", "name", seance.id_prof);
+           
             return View(seance);
         }
 
@@ -85,7 +82,7 @@ namespace SchoolManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_seance,date_se,heure_debut,id_groupe,id_prof,heure_fin")] seance seance)
+        public ActionResult Edit([Bind(Include = "id_seance,heure_debut,id_groupe,id_prof,heure_fin")] seance seance)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +90,7 @@ namespace SchoolManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_groupe = new SelectList(db.Groupe, "id_groupe", "id_groupe", seance.id_groupe);
-            ViewBag.id_prof = new SelectList(db.Prof, "CNE", "name", seance.id_prof);
+           
             return View(seance);
         }
 

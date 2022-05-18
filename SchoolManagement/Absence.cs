@@ -17,6 +17,7 @@ namespace SchoolManagement
         public int id { get; set; }
         public string id_etudiant { get; set; }
         public int id_seance { get; set; }
+        public Nullable<System.DateTime> DateAbsence { get; set; }
     
         public virtual Etudiant Etudiant { get; set; }
         public virtual seance seance { get; set; }

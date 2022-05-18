@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SchoolManagement.note>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.note_exam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etudiant.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etudiant1.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Exam.CNE_prof)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.note_exam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etudiant.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etudiant1.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Exam.CNE_prof)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -126,10 +126,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Absence.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="admin.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -145,48 +145,48 @@
     <Compile Include="Controllers\notesController.cs" />
     <Compile Include="Controllers\ProfsController.cs" />
     <Compile Include="Controllers\seancesController.cs" />
-    <Compile Include="ecoleEntity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ecoleEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ecoleEntity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ecoleEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ecoleEntity.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Etudiant.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Exam.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Filiere.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Groupe.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="matiere.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="note.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Prof.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="seance.cs">
-      <DependentUpon>ecoleEntity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -194,28 +194,28 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="ecoleEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ecoleEntity.Context.cs</LastGenOutput>
-      <DependentUpon>ecoleEntity.edmx</DependentUpon>
-    </Content>
-    <Content Include="ecoleEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ecoleEntity.edmx</DependentUpon>
-      <LastGenOutput>ecoleEntity.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="ecoleEntity.edmx">
+    <EntityDeploy Include="Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ecoleEntity.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="ecoleEntity.edmx.diagram">
-      <DependentUpon>ecoleEntity.edmx</DependentUpon>
+    <Content Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -242,18 +242,38 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Groupes\Index.cshtml" />
+    <Content Include="Views\Groupes\Edit.cshtml" />
+    <Content Include="Views\Groupes\Delete.cshtml" />
+    <Content Include="Views\Etudiants\Index.cshtml" />
+    <Content Include="Views\Etudiants\Create.cshtml" />
+    <Content Include="Views\Etudiants\Delete.cshtml" />
+    <Content Include="Views\Groupes\Create.cshtml" />
+    <Content Include="Views\Filieres\Create.cshtml" />
+    <Content Include="Views\Filieres\Delete.cshtml" />
+    <Content Include="Views\Profs\Index.cshtml" />
+    <Content Include="Views\Profs\Edit.cshtml" />
+    <Content Include="Views\Profs\Delete.cshtml" />
+    <Content Include="Views\matieres\Create.cshtml" />
+    <Content Include="Views\matieres\Index.cshtml" />
+    <Content Include="Views\Filieres\Index.cshtml" />
+    <Content Include="Views\Absences\Index.cshtml" />
+    <Content Include="Views\Absences\Create.cshtml" />
+    <Content Include="Views\Absences\Delete.cshtml" />
+    <Content Include="Views\admins\Index.cshtml" />
+    <Content Include="Views\notes\Index.cshtml" />
+    <Content Include="Views\matieres\Edit.cshtml" />
+    <Content Include="Views\Profs\Create.cshtml" />
+    <Content Include="Views\seances\Index.cshtml" />
+    <Content Include="Views\seances\Details.cshtml" />
+    <Content Include="Views\seances\Create.cshtml" />
+    <Content Include="Views\seances\Edit.cshtml" />
+    <Content Include="Views\seances\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Etudiants\" />
     <Folder Include="Views\Exams\" />
-    <Folder Include="Views\Filieres\" />
-    <Folder Include="Views\Groupes\" />
-    <Folder Include="Views\matieres\" />
-    <Folder Include="Views\notes\" />
-    <Folder Include="Views\Profs\" />
-    <Folder Include="Views\seances\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

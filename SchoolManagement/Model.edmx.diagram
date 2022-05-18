@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dcacbee01b6643f6a118ddd1956ede79" Name="Diagram1">
+        <EntityTypeShape EntityType="ecoleModel.Absence" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.admin" Width="1.5" PointX="7.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.Etudiant" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.Exam" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.Filiere" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.Groupe" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.matiere" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.note" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.Prof" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoleModel.seance" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="ecoleModel.FK_Absence_Etudiant" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_Absence_seance" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_Etudiant_Groupe" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_note_Etudiant" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_note_Etudiant1" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_Exam_Prof" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_note_Exam" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_Groupe_Filiere" ManuallyRouted="false" />
+        <AssociationConnector Association="ecoleModel.FK_Prof_matiere" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

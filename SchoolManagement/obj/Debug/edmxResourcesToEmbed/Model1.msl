@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ecoleModelStoreContainer" CdmEntityContainer="ecoleEntities1">
+    <EntitySetMapping Name="Absence">
+      <EntityTypeMapping TypeName="ecoleModel.Absence">
+        <MappingFragment StoreEntitySet="Absence">
+          <ScalarProperty Name="DateAbsence" ColumnName="DateAbsence" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_etudiant" ColumnName="id_etudiant" />
+          <ScalarProperty Name="id_seance" ColumnName="id_seance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="admin">
+      <EntityTypeMapping TypeName="ecoleModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="CNE" ColumnName="CNE" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Etudiant">
+      <EntityTypeMapping TypeName="ecoleModel.Etudiant">
+        <MappingFragment StoreEntitySet="Etudiant">
+          <ScalarProperty Name="CNE" ColumnName="CNE" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="id_group" ColumnName="id_group" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exam">
+      <EntityTypeMapping TypeName="ecoleModel.Exam">
+        <MappingFragment StoreEntitySet="Exam">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="CNE_prof" ColumnName="CNE_prof" />
+          <ScalarProperty Name="date_exam" ColumnName="date_exam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Filiere">
+      <EntityTypeMapping TypeName="ecoleModel.Filiere">
+        <MappingFragment StoreEntitySet="Filiere">
+          <ScalarProperty Name="id_filiere" ColumnName="id_filiere" />
+          <ScalarProperty Name="name_filiere" ColumnName="name_filiere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groupe">
+      <EntityTypeMapping TypeName="ecoleModel.Groupe">
+        <MappingFragment StoreEntitySet="Groupe">
+          <ScalarProperty Name="id_groupe" ColumnName="id_groupe" />
+          <ScalarProperty Name="id_filiere" ColumnName="id_filiere" />
+          <ScalarProperty Name="number_group" ColumnName="number_group" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="matiere">
+      <EntityTypeMapping TypeName="ecoleModel.matiere">
+        <MappingFragment StoreEntitySet="matiere">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="note">
+      <EntityTypeMapping TypeName="ecoleModel.note">
+        <MappingFragment StoreEntitySet="note">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_exam" ColumnName="id_exam" />
+          <ScalarProperty Name="id_etudiant" ColumnName="id_etudiant" />
+          <ScalarProperty Name="note_exam" ColumnName="note_exam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prof">
+      <EntityTypeMapping TypeName="ecoleModel.Prof">
+        <MappingFragment StoreEntitySet="Prof">
+          <ScalarProperty Name="CNE" ColumnName="CNE" />
+          <ScalarProperty Name="id_matiere" ColumnName="id_matiere" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="adresse" ColumnName="adresse" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seance">
+      <EntityTypeMapping TypeName="ecoleModel.seance">
+        <MappingFragment StoreEntitySet="seance">
+          <ScalarProperty Name="id_seance" ColumnName="id_seance" />
+          <ScalarProperty Name="heure_debut" ColumnName="heure_debut" />
+          <ScalarProperty Name="id_groupe" ColumnName="id_groupe" />
+          <ScalarProperty Name="id_prof" ColumnName="id_prof" />
+          <ScalarProperty Name="heure_fin" ColumnName="heure_fin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

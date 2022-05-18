@@ -21,6 +21,13 @@ namespace SchoolManagement.Controllers
             return View(absence.ToList());
         }
 
+        public ActionResult Home()
+        {
+            
+            return View();
+        }
+
+
         // GET: Absences/Details/5
         public ActionResult Details(int? id)
         {
@@ -37,10 +44,14 @@ namespace SchoolManagement.Controllers
         }
 
         // GET: Absences/Create
-        public ActionResult Create()
+        public ActionResult Create(int? IdFind)
         {
-            ViewBag.id_etudiant = new SelectList(db.Etudiant, "CNE", "nom");
-            ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_prof");
+            ViewBag.filier = db.Filiere.ToList();
+            ViewBag.Groupe = db.Groupe.ToList();
+            ViewBag.Seance = db.seance.ToList();
+
+            ViewBag.Etudiant =  db.Etudiant.Where(x => x.id_group == IdFind);
+
             return View();
         }
 
@@ -48,19 +59,39 @@ namespace SchoolManagement.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,id_etudiant,id_seance")] Absence absence)
+        public ActionResult Create(Absence absence)
         {
+            string message = "";
             if (ModelState.IsValid)
             {
-                db.Absence.Add(absence);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                   
+                        absence.DateAbsence = DateTime.Now;
+                        db.Absence.Add(absence);
 
-            ViewBag.id_etudiant = new SelectList(db.Etudiant, "CNE", "nom", absence.id_etudiant);
-            ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_prof", absence.id_seance);
-            return View(absence);
+                        db.SaveChanges();
+                        message = "Ajouter avec succés";
+                    
+
+                    return this.Json(new { id = absence.id });
+                }
+                catch (Exception ex) { message = "Error!"; }
+            }
+            else
+            {
+                message = "Error.";
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return new JsonResult { Data = message };
+            }
+            else
+            {
+                ViewBag.Message = message;
+                return View(absence);
+                //return Json(new { id = absence.Id });
+            }
         }
 
         // GET: Absences/Edit/5
@@ -76,7 +107,7 @@ namespace SchoolManagement.Controllers
                 return HttpNotFound();
             }
             ViewBag.id_etudiant = new SelectList(db.Etudiant, "CNE", "nom", absence.id_etudiant);
-            ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_prof", absence.id_seance);
+            ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_seance", absence.id_seance);
             return View(absence);
         }
 
@@ -85,7 +116,7 @@ namespace SchoolManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,id_etudiant,id_seance")] Absence absence)
+        public ActionResult Edit([Bind(Include = "id,id_etudiant,id_seance,DateAbsence")] Absence absence)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +125,7 @@ namespace SchoolManagement.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.id_etudiant = new SelectList(db.Etudiant, "CNE", "nom", absence.id_etudiant);
-            ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_prof", absence.id_seance);
+            ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_seance", absence.id_seance);
             return View(absence);
         }
 
@@ -114,14 +145,26 @@ namespace SchoolManagement.Controllers
         }
 
         // POST: Absences/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-            Absence absence = db.Absence.Find(id);
-            db.Absence.Remove(absence);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Absence absence = db.Absence.SingleOrDefault(c => c.id == id);
+            if (absence != null)
+            {
+                db.Absence.Remove(absence);
+                if (db.SaveChanges() > 0)
+                {
+                    return Json(new { error = false, Message = "Cet absence est supprimé avec succès" });
+                }
+                else
+                {
+                    return Json(new { error = true, Message = "Il y a une erreur dans la sauvegarde des données" });
+                }
+            }
+            else
+            {
+                return Json(new { error = true, Message = "Ce formateur n'existe pas" });
+            }
         }
 
         protected override void Dispose(bool disposing)
