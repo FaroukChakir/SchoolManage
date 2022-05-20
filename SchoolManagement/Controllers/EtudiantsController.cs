@@ -172,7 +172,16 @@ namespace SchoolManagement.Controllers
             Etudiant etudiant = db.Etudiant.SingleOrDefault(c => c.CNE == id);
             if (etudiant != null)
             {
-                
+
+                foreach(Absence absence in db.Absence)
+                {
+                    if(absence.id_etudiant == id)
+                    {
+                        db.Absence.Remove(absence);
+                    }
+                }
+
+
                 db.Etudiant.Remove(etudiant);
                 if (db.SaveChanges() > 0)
                 {

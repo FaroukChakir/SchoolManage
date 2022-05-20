@@ -94,8 +94,8 @@
                                 {
                                 <tr>
                                     <th hidden> <input hidden style="font-size: 12px;" disabled value="@item.CNE" id="DeletingId" /> </th>
-                                    <th> <input id="nom" style="font-size: 12px;" disabled value="@item.nom" /> </th>
-                                    <th> <input  id="prenom" style="font-size: 12px;" disabled value="@item.prenom" /> </th>
+                                    <th> <input id="nom" style="font-size: 12px;" disabled value="@item.nom.ToUpper()" /> </th>
+                                    <th> <input  id="prenom" style="font-size: 12px;" disabled value="@item.prenom.ToUpper()" /> </th>
                                     <th>
 
 
@@ -111,12 +111,12 @@
                                                     {
                                                         if (groupe.id_groupe == item.id_group)
                                                         {
-                                                            <option selected value="@groupe.id_groupe">   @filiere.name_filiere  @groupe.number_group    </option>
+                                                            <option selected value="@groupe.id_groupe">   @filiere.name_filiere.ToUpper()  @groupe.number_group    </option>
 
                                                         }
                                                         else
                                                         {
-                                                            <option value="@groupe.id_groupe">   @filiere.name_filiere  @groupe.number_group    </option>
+                                                            <option value="@groupe.id_groupe">   @filiere.name_filiere.ToUpper()  @groupe.number_group    </option>
 
                                                         }
                                                     }
@@ -136,8 +136,8 @@
 
 
                                     </th>
-                                    <th> <input id="login"  style="font-size: 12px;" disabled value="@item.login" /> </th>
-                                    <th> <input  id="password"  style="font-size: 12px;" disabled value="@item.password" /> </th>
+                                    <th> <input id="login"  style="font-size: 12px;" disabled value="@item.login.ToUpper()" /> </th>
+                                    <th> <input  id="password"  style="font-size: 12px;" disabled value="@item.password.ToUpper()" /> </th>
 
 
                                     <td id="update" class="bg-success" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font-size:15px;font:bold;">
@@ -206,7 +206,7 @@
 
 
     $("table tbody td[id=delete]").click(function () {
-        var id = $(this).closest('tr').find('input[id=DeletingId]').val();
+        var id = $(this).closest('tr').find('th input[id=DeletingId]').val();
 
         $.ajax({
             url: "/Etudiants/Delete/" + id,
