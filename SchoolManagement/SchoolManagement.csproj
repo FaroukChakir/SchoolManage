@@ -257,8 +257,6 @@
     <Content Include="Views\Filieres\Create.cshtml" />
     <Content Include="Views\Filieres\Delete.cshtml" />
     <Content Include="Views\Profs\Index.cshtml" />
-    <Content Include="Views\Profs\Edit.cshtml" />
-    <Content Include="Views\Profs\Delete.cshtml" />
     <Content Include="Views\matieres\Create.cshtml" />
     <Content Include="Views\matieres\Index.cshtml" />
     <Content Include="Views\Filieres\Index.cshtml" />

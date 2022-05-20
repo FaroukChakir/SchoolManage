@@ -4,66 +4,322 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.adresse)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.matiere.nom)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.adresse)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.matiere.nom)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CNE }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CNE }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CNE })
-        </td>
-    </tr>
-}
 
-</table>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link href="../assets/css/variables.css" rel="stylesheet">
+
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+    <section id="hero-animated" class=" align-items-center">
+        <div style="display:flex">
+
+            <a href="@Url.Action("Create", "Profs")">
+                <button type="button" class="btn btn-primary">
+                    <span class="btn-label">
+                        <i class="bi bi-file-earmark-plus" style="font-size:15px;">&nbsp;</i><i style="font-size:15px;" class="fa fa-plus">Ajouter Professeurs</i>
+                    </span>
+                </button>
+            </a>&nbsp;
+            @using (Html.BeginForm("Export", "Profs", FormMethod.Post))
+            {
+                <button type="submit" ty class="btn btn-primary">
+                    <span class="btn-label">
+                        <i class="bi bi-file-earmark-pdf" style="font-size:15px;"></i>&nbsp;<i style="font-size:15px;" class="fa fa-plus"> Exporter PDF </i>
+                    </span>
+                </button>
+
+            }
+        </div>
+        <br />
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-info">
+                    <div class="card-body">
+                        <h1 style="text-align: center;">List Des Professeurs</h1>
+                        <table id="mytable " class="display nowrap table table-hover table-striped table-bordered">
+                            <thead>
+
+                                <tr>
+                                    @*//table.AddCell(prof.CNE);
+                                    //table.AddCell(prof.name);
+                                    //table.AddCell(prof.matiere.nom);
+                                    //table.AddCell(prof.email);
+                                    //table.AddCell(prof.adresse);
+                                    //table.AddCell(prof.login);
+                                    //table.AddCell(prof.password);
+                                    //table.AddCell(prof.Tel);*@
+
+                                    @*<th  style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">CNE</th>*@
+
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Nom</th>
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Matière</th>
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Email</th>
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Adresse</th>
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Tel</th>
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Login</th>
+                                    <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Password</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <th hidden> <input hidden style="font-size: 12px;" disabled value="@item.CNE" id="DeletingId" /> </th>
+                                    <th> <input id="name" disabled value="@item.name" /> </th>
+
+                                    <th>
+
+
+                                        <select disabled class="form-select form-select-lg mb-3" aria-label="Default select example" id="Classe">
+
+
+
+                                            @foreach (matiere matiere in ViewBag.matiere)
+                                            {
+                                                if (matiere.id == item.id_matiere)
+                                                {
+
+                                                    <option selected value="@matiere.id"> @matiere.nom </option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@matiere.id"> @matiere.nom </option>
+
+                                                }
+                                            }
+
+
+
+
+
+
+
+                                        </select>
+
+
+                                    </th>
+                                    @*<th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Nom</th>
+        <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Email</th>
+        <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Adresse</th>
+        <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Login</th>
+        <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Password</th>
+        <th style="font-size: 12px;background-color: #B8DBFD; border: 1px solid #ccc">Tel</th>*@
+                                    <th> <input id="email" disabled value="@item.email" /> </th>
+                                    <th> <input id="adresse" disabled value="@item.adresse" /> </th>
+                                    <th> <input id="Tel" disabled value="@item.Tel" /> </th>
+                                    <th> <input id="login" disabled value="@item.login" /> </th>
+                                    <th> <input id="password" disabled value="@item.password" /> </th>
+
+
+                                    <td id="update" class="bg-success" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font:bold;">
+
+                                        Modifier
+
+
+                                    </td>
+                                    <td id="Apply" class="bg-primary" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font:bold;">
+
+                                        Appliquer
+
+
+                                    </td>
+                                    <td id="delete" class="bg-danger" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font:bold;">
+
+                                        Supprimer
+
+
+                                    </td>
+
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+</body>
+
+
+
+</html>
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="/scripts/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+<script>
+
+    //$('#mytable').on('click', 'td', function () {
+    //    alert('clicked');
+    //});
+
+
+    $("table tbody td[id=delete]").click(function () {
+        var id = $(this).closest('tr').find('input[id=DeletingId]').val();
+
+        $.ajax({
+            url: "/Profs/Delete/" + id,
+            type: "POST",
+            processData: false,
+            contentType: false,
+
+            success: function (data) {
+                location.reload();
+            }
+        });
+        alert(idDeleting);
+
+
+    });
+
+
+    $("table tbody td[id=update]").click(function () {
+
+
+        //$("table tbody input").removeAttr('disabled');
+        if ($(this).closest('tr').find('input').prop('disabled') && $(this).text('annuler') ) {
+            $(this).text('Annuler');
+            $(this).closest('tr').find('input').removeAttr('disabled');
+            $(this).closest('tr').find('select').removeAttr('disabled');
+        }
+        else {
+            $(this).text('Modifier');
+            $(this).closest('tr').find('input').prop('disabled', true);
+            $(this).closest('tr').find('select').prop('disabled', true);
+        }
+        //$("input").attr('disabled', 'disabled');
+
+    });
+
+
+
+
+    /*Apply Changes */
+
+
+
+    $("table tbody td[id=Apply]").click(function () {
+
+
+     
+                                  
+
+        UpdateCne = $(this).closest('tr').find('th input[id=DeletingId]').val();
+
+        UpdateMatiere = $(this).closest('tr').find('th option:selected').val();
+
+        UpdateNom = $(this).closest('tr').find('th input[id=name]').val();
+
+        UpdateTel = $(this).closest('tr').find('th input[id=Tel]').val();
+
+        UpdateLogin = $(this).closest('tr').find('th input[id=login]').val();
+
+        UpdatePassword = $(this).closest('tr').find('th input[id=password]').val();
+
+        UpdateAdresse = $(this).closest('tr').find('th input[id=adresse]').val();
+
+        UpdateMail = $(this).closest('tr').find('th input[id=email]').val();
+
+
+        /* Json Data Array */
+
+
+        var jsonData = {
+            CNE: UpdateCne,
+            id_matiere: UpdateMatiere,
+            name: UpdateNom,
+            email: UpdateMail,
+            adresse: UpdateAdresse,
+            login: UpdateLogin,
+            password: UpdatePassword,
+            Tel: UpdateTel
+
+            };
+
+        console.log(jsonData);
+
+
+
+           $.ajax({
+             url: "@Url.Action("Edit","Profs")",
+                type: "POST",
+                data: jsonData,
+                dataType: "json",
+
+                success: function (response) {
+                    //alert("Hello: " + response.id);
+
+                    //$this.attr('id', response.id)
+                },
+           });
+        $("table tbody td[id=update]").text('Modifier');
+        $(this).closest('tr').find('input').prop('disabled', true);
+        $(this).closest('tr').find('select').prop('disabled', true);
+    });
+
+
+
+
+
+</script>
