@@ -274,8 +274,6 @@
     <Content Include="Views\seances\Create.cshtml" />
     <Content Include="Views\seances\Edit.cshtml" />
     <Content Include="Views\seances\Delete.cshtml" />
-    <Content Include="Views\Etudiants\Remove.cshtml" />
-    <Content Include="Views\Etudiants\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
