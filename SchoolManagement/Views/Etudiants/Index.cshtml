@@ -111,12 +111,12 @@
                                                     {
                                                         if (groupe.id_groupe == item.id_group)
                                                         {
-                                                            <option selected value="@groupe.id_filiere">   @filiere.name_filiere  @groupe.number_group    </option>
+                                                            <option selected value="@groupe.id_groupe">   @filiere.name_filiere  @groupe.number_group    </option>
 
                                                         }
                                                         else
                                                         {
-                                                            <option value="@groupe.id_filiere">   @filiere.name_filiere  @groupe.number_group    </option>
+                                                            <option value="@groupe.id_groupe">   @filiere.name_filiere  @groupe.number_group    </option>
 
                                                         }
                                                     }
@@ -300,9 +300,10 @@
 
                     //$this.attr('id', response.id)
                 },
-            });
-
-
+           });
+        $("table tbody td[id=update]").text('Modifier');
+        $(this).closest('tr').find('input').prop('disabled', true);
+        $(this).closest('tr').find('select').prop('disabled', true);
     });
 
 
