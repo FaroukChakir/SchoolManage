@@ -7,6 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SchoolManagement;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.xml;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.xml.simpleparser;
+using System.IO;
 
 namespace SchoolManagement.Controllers
 {
@@ -126,6 +132,7 @@ namespace SchoolManagement.Controllers
             }
             ViewBag.id_etudiant = new SelectList(db.Etudiant, "CNE", "nom", absence.id_etudiant);
             ViewBag.id_seance = new SelectList(db.seance, "id_seance", "id_seance", absence.id_seance);
+           
             return View(absence);
         }
 
@@ -167,6 +174,71 @@ namespace SchoolManagement.Controllers
             }
         }
 
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export()
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+
+
+
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+
+                BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                PdfPTable table = new PdfPTable(4);
+
+                Font font = new Font(bf, 30, Font.NORMAL, BaseColor.RED);
+
+
+                PdfPCell cell0 = new PdfPCell(new Phrase("List des absences", font));
+                cell0.Colspan = 4;
+                cell0.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+
+                cell0.Border = PdfPCell.NO_BORDER;
+                cell0.Padding = 10;
+                table.AddCell(cell0);
+
+                PdfPCell cell1 = new PdfPCell(new Phrase("Nom"));
+                cell1.BackgroundColor = BaseColor.YELLOW;
+
+                table.AddCell(cell1);
+
+                PdfPCell cell2 = new PdfPCell(new Phrase("Prénom"));
+                cell2.BackgroundColor = BaseColor.YELLOW;
+                table.AddCell(cell2);
+
+                PdfPCell cell3 = new PdfPCell(new Phrase("Date Absence"));
+                cell3.BackgroundColor = BaseColor.YELLOW;
+                table.AddCell(cell3);
+
+                PdfPCell cell4 = new PdfPCell(new Phrase("Seance"));
+                cell4.BackgroundColor = BaseColor.YELLOW;
+                table.AddCell(cell4);
+
+                foreach (Absence absence in db.Absence.ToList())
+                {
+                    string date = Convert.ToDateTime(absence.DateAbsence).Day.ToString() + '/' + Convert.ToDateTime(absence.DateAbsence).Month.ToString() + '/' + Convert.ToDateTime(absence.DateAbsence).Year.ToString();
+                    table.AddCell(absence.Etudiant.nom);
+                    table.AddCell(absence.Etudiant.prenom);
+                    table.AddCell(date);
+                    table.AddCell(absence.seance.heure_debut.ToString() +'-'+ absence.seance.heure_fin.ToString());
+                }
+                string todaydate = DateTime.Now.Day.ToString() + '/' + DateTime.Now.Month.ToString() + '/' + DateTime.Now.Year.ToString();
+
+                PdfPCell cell5 = new PdfPCell(new Phrase(todaydate));
+                cell5.Colspan = 4;
+                cell5.Border = PdfPCell.NO_BORDER;
+                table.AddCell(cell5);
+                pdfDoc.Add(table);
+
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "List Absences.pdf");
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

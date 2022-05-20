@@ -31,6 +31,14 @@
 
     <link href="../assets/css/main.css" rel="stylesheet">
 
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <script src="assets/js/main.js"></script>
 
 </head>
 
@@ -44,11 +52,17 @@
             ViewBag.Title = "Create";
         }
 
-        <h4 class="text-themecolor m-b-0 m-t-0">Absences</h4>
-        <ol class="breadcrumb">
-            <h3 class="breadcrumb-item"><a href="@Url.Action("Create","Absences")">Absences</a></h3>
-            <h3 class="breadcrumb-item active">Liste des Etudiants</h3>
-        </ol>
+        <div style="display:flex">
+
+            <a href="@Url.Action("Index", "Absences")">
+                <button type="button" class="btn btn-primary">
+                    <span class="btn-label">
+                        <i style="font-size:15px;" class="fa fa-plus">Consulter Liste Absences</i>
+                    </span>
+                </button>
+            </a>&nbsp;
+            
+        </div>
 
 
         @using (Html.BeginForm("Create", "Absences", FormMethod.Get))
@@ -167,14 +181,7 @@
 
 
     
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-
-    <script src="assets/js/main.js"></script>
+    
 
 </body>
 

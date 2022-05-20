@@ -4,54 +4,309 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prenom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Groupe.id_groupe)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prenom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Groupe.id_groupe)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CNE }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CNE }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CNE })
-        </td>
-    </tr>
-}
 
-</table>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link href="../assets/css/variables.css" rel="stylesheet">
+
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+    <section id="hero-animated" class=" align-items-center">
+        <div style="display:flex">
+
+            <a href="@Url.Action("Create", "Etudiants")">
+                <button type="button" class="btn btn-primary">
+                    <span class="btn-label">
+                        <i style="font-size:15px;" class="fa fa-plus">Ajouter Etudiant</i>
+                    </span>
+                </button>
+            </a>&nbsp;
+            @using (Html.BeginForm("Export", "Etudiants", FormMethod.Post))
+            {
+                <button type="submit" ty class="btn btn-primary">
+                    <span class="btn-label">
+                        <i style="font-size:15px;" class="fa fa-plus"> Exporter PDF </i>
+                    </span>
+                </button>
+
+            }
+        </div>
+        <br />
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-info">
+                    <div class="card-body">
+                        <h1 style="text-align: center;">List Des Etudiants</h1>
+                        <table id="mytable " class="display nowrap table table-hover table-striped table-bordered">
+                            <thead>
+
+                                <tr>
+
+
+                                    @*<th  style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">CNE</th>*@
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Nom</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Prenom</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Classe</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Login</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Mot de Passe</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <th hidden> <input hidden style="font-size: 12px;" disabled value="@item.CNE" id="DeletingId" /> </th>
+                                    <th> <input id="nom" style="font-size: 12px;" disabled value="@item.nom" /> </th>
+                                    <th> <input  id="prenom" style="font-size: 12px;" disabled value="@item.prenom" /> </th>
+                                    <th>
+
+
+                                        <select  disabled class="form-select form-select-lg mb-3" aria-label="Default select example" id="Classe">
+
+
+                                            @foreach (Filiere filiere in ViewBag.filier)
+                                            {
+                                                foreach (Groupe groupe in ViewBag.Groupe)
+                                                {
+
+                                                    if (groupe.id_filiere == filiere.id_filiere)
+                                                    {
+                                                        if (groupe.id_groupe == item.id_group)
+                                                        {
+                                                            <option selected value="@groupe.id_filiere">   @filiere.name_filiere  @groupe.number_group    </option>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@groupe.id_filiere">   @filiere.name_filiere  @groupe.number_group    </option>
+
+                                                        }
+                                                    }
+
+
+
+
+                                                }
+                                            }
+
+
+
+
+
+
+                                        </select>
+
+
+                                    </th>
+                                    <th> <input id="login"  style="font-size: 12px;" disabled value="@item.login" /> </th>
+                                    <th> <input  id="password"  style="font-size: 12px;" disabled value="@item.password" /> </th>
+
+
+                                    <td id="update" class="bg-success" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font-size:15px;font:bold;">
+
+                                        Modifier
+
+
+                                    </td>
+                                    <td id="Apply" class="bg-primary" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font-size:15px;font:bold;">
+
+                                        Appliquer
+
+
+                                    </td>
+                                    <td id="delete" class="bg-danger" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font-size:15px;font:bold;">
+
+                                        Supprimer
+
+
+                                    </td>
+
+                                </tr>
+                                 }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+</body>
+
+
+
+</html>
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="/scripts/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+<script>
+
+    //$('#mytable').on('click', 'td', function () {
+    //    alert('clicked');
+    //});
+
+
+    $("table tbody td[id=delete]").click(function () {
+        var id = $(this).closest('tr').find('input[id=DeletingId]').val();
+
+        $.ajax({
+            url: "/Etudiants/Delete/" + id,
+            type: "POST",
+            processData: false,
+            contentType: false,
+
+            success: function (data) {
+                location.reload();
+            }
+        });
+        alert(idDeleting);
+
+
+    });
+
+
+    $("table tbody td[id=update]").click(function () {
+
+        //$("table tbody input").removeAttr('disabled');
+        if ($(this).closest('tr').find('input').prop('disabled') && $(this).text('annuler') ) {
+            $(this).text('Annuler');
+            $(this).closest('tr').find('input').removeAttr('disabled');
+            $(this).closest('tr').find('select').removeAttr('disabled');
+        }
+        else {
+            $(this).text('Modifier');
+            $(this).closest('tr').find('input').prop('disabled', true);
+            $(this).closest('tr').find('select').prop('disabled', true);
+        }
+        //$("input").attr('disabled', 'disabled');
+
+    });
+
+
+
+
+    /*Apply Changes */
+
+
+
+    $("table tbody td[id=Apply]").click(function () {
+        //    public string CNE { get; set; }
+        //public string nom { get; set; }
+        //public int id_group { get; set; }
+        //public string prenom { get; set; }
+        //public string login { get; set; }
+        //public string password { get; set; }
+
+
+        /* Json Data Array */
+
+        UpdateClasse = $(this).closest('tr').find('th option:selected').val();
+
+        UpdateCne = $(this).closest('tr').find('th input[id=DeletingId]').val();
+
+        UpdateNom = $(this).closest('tr').find('th input[id=nom]').val();
+
+        UpdatePrenom = $(this).closest('tr').find('th input[id=prenom]').val();
+
+        UpdateLogin = $(this).closest('tr').find('th input[id=login]').val();
+
+        UpdatePassword = $(this).closest('tr').find('th input[id=password]').val();
+
+        /* Json Data Array */
+
+
+        var jsonData = {
+
+                CNE: UpdateCne,
+                nom: UpdateNom,
+                id_group: UpdateClasse,
+                prenom: UpdatePrenom,
+                login: UpdateLogin,
+                password: UpdatePassword
+
+            };
+
+        console.log(jsonData);
+
+      
+
+           $.ajax({
+             url: "@Url.Action("Edit","Etudiants")",
+                type: "POST",
+                data: jsonData,
+                dataType: "json",
+
+                success: function (response) {
+                    //alert("Hello: " + response.id);
+
+                    //$this.attr('id', response.id)
+                },
+            });
+
+
+    });
+
+
+
+
+
+</script>

@@ -1,80 +1,234 @@
-﻿@model SchoolManagement.Etudiant
+﻿@model IEnumerable<SchoolManagement.Absence>
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Index";
 }
 
-<h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Etudiant</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.CNE, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CNE, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CNE, "", new { @class = "text-danger" })
+
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <link href="../assets/css/variables.css" rel="stylesheet">
+
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+
+    <section id="hero-animated" class=" align-items-center">
+        <div style="display:flex">
+
+            <a href="@Url.Action("Index", "Etudiants")">
+                <button type="button" class="btn btn-primary">
+                    <span class="btn-label">
+                        <i style="font-size:15px;" class="fa fa-plus">Consulter Liste Etudiants </i>
+                    </span>
+                </button>
+            </a>&nbsp;
+           
+        </div>
+        <br />
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-info">
+                    <div class="card-body">
+                        <h1 style="text-align: left;">Ajout Etudiants</h1>
+
+                    </div>
+                    <div class="card-body">
+
+                        <form>
+
+                            <div class="row mb-4">
+
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input  type="text" id="Nom" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Nom</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="text" id="Prenom" class="form-control" />
+                                        <label class="form-label" for="form3Example2">Prénom</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row mb-4">
+
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="text" id="CNE" class="form-control" />
+                                        <label class="form-label" for="form3Example1">CNE</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline">
+
+                                        <select class="form-select form-select-lg mb-3" aria-label="Default select example" id="Classe">
+                                            <option selected="selected">Choisissez La Classe </option>
+                                            @*ViewBag.filier = db.Filiere.ToList();
+        ViewBag.Groupe = db.Groupe.ToList();*@
+
+                                            @foreach (Filiere filiere in ViewBag.filier)
+                                            {
+                                                foreach (Groupe groupe in ViewBag.Groupe)
+                                                {
+
+                                                    if (groupe.id_filiere == filiere.id_filiere)
+                                                    {
+                                                        <option value="@groupe.id_groupe">   @filiere.name_filiere  @groupe.number_group    </option>
+                                                    }
+                                                }
+                                            }
+
+
+
+
+
+
+                                        </select>
+
+
+
+
+
+                                        <label class="form-label" for="form3Example2">CLasse</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row mb-4">
+
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="text" id="Login" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Login</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline">
+                                        <input type="text" id="Password" class="form-control" />
+                                        <label class="form-label" for="form3Example2">Password</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            
+
+
+                            <button style="font-size:20px;width:200px;"  id="SubMitInsertion" class="btn btn-primary btn-block mb-4"> Ajouter Etudiant   </button>
+
+
+
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_group, "id_group", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("id_group", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_group, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.prenom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.prenom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.prenom, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    </section>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.login, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.login, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.login, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</body>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+
+</html>
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="/scripts/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<script src="assets/js/main.js"></script>
+
+<script>
+
+
+
+
+    @* public string CNE { get; set; }
+        public string nom { get; set; }
+        public int id_group { get; set; }
+        public string prenom { get; set; }
+        public string login { get; set; }
+        public string password { get; set; } *@
+
+
+
+    $("#SubMitInsertion").click(function () {
+        //var idDeleting = $(this).closest('tr').find('input[id=DeletingId]').val();
+        var selected_option = $('#Classe option:selected').val();
+        var jsonData = {
+            CNE: $("#CNE").val(),
+            nom: $("#Nom").val(),
+            prenom: $("#Prenom").val(),
+            login: $("#Login").val(),
+            password: $("#Password").val(),
+            id_group: selected_option
+        };
+
+
+
+        $.ajax({
+           url: "@Url.Action("Create","Etudiants")",
+            type: "POST",
+            data: jsonData,
+            dataType: "json",
+
+            success: function (data) {
+             
+            }
+        });
+    });
+
+
+
+</script>

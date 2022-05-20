@@ -39,97 +39,101 @@
 </head>
 
 <body>
-   
+
 
     <section id="hero-animated" class=" align-items-center">
-        <p>
+        <div style="display:flex">
 
             <a href="@Url.Action("Create", "Absences")">
                 <button type="button" class="btn btn-primary">
                     <span class="btn-label">
-                        <i class="fa fa-plus"></i>
-                    </span>Noter Absence
+                        <i style="font-size:15px;" class="fa fa-plus">Noter Absence</i>
+                    </span>
                 </button>
-            </a>
-        </p>
-        <fieldset>
+            </a>&nbsp;
+            @using (Html.BeginForm("Export", "Absences", FormMethod.Post))
+            {
+                <button type="submit" ty class="btn btn-primary">
+                    <span class="btn-label">
+                        <i style="font-size:15px;" class="fa fa-plus"> Exporter PDF </i>
+                    </span>
+                </button>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card card-outline-info">
-                        <div class="card-body">
-                            <table id="myTable" class="table table-striped">
-                                    <tbody class="table-light">
-                                        <tr>
-                                            <th>
-                                                @Html.DisplayNameFor(model => model.DateAbsence)
-                                            </th>
-                                            <th>
-                                                Séance absence
-                                            </th>
-                                            <th>
-                                                Etudiant
-                                            </th>
-                                            <th>
-                                                Classe
-                                            </th>
+            }
+        </div>
+        <br />
 
-                                            <th></th>
-                                        </tr>
+        
 
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <th hidden> <input type="text" id="DeletingId" value="@item.id" hidden />  </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => Convert.ToDateTime(item.DateAbsence).Day) / @Html.DisplayFor(modelItem => Convert.ToDateTime(item.DateAbsence).Month) / @Html.DisplayFor(modelItem => Convert.ToDateTime(item.DateAbsence).Year)
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-info">
+                    <div class="card-body">
+                        <h1 style="text-align: center;">List Des Absences</h1>
+                        <table id="mytable " class="display nowrap table table-hover table-striped table-bordered">
+                            <thead>
 
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.seance.heure_debut)  -   @Html.DisplayFor(modelItem => item.seance.heure_fin)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItem => item.Etudiant.nom)  &nbsp;  @Html.DisplayFor(modelItem => item.Etudiant.prenom)
-                                                </th>
-                                                <th>
-                                                    @Html.DisplayFor(modelItems => item.Etudiant.Groupe.Filiere.name_filiere) @Html.DisplayFor(modelItems => item.Etudiant.Groupe.number_group)
-                                                </th>
-                                                <td style="cursor:pointer;background-color:red;">
-                                                    <p style="text-align:center;font-size:12px;">Supprimer</p>
-                                                </td>
+                                <tr>
 
-                                            </tr>
-                                        }
 
-                                    </tbody>
-                                </table>
-                        </div>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Nom</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Prénom</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Date absence</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc">Seance</th>
+                                    <th style="font-size: 15px;background-color: #B8DBFD; border: 1px solid #ccc"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th style="width:120px;border: 1px solid #ccc;font-size:12px">@item.Etudiant.nom</th>
+                                        <th style="width: 120px; border: 1px solid #ccc; font-size: 12px">@item.Etudiant.prenom</th>
+                                        <th style="width: 120px; border: 1px solid #ccc; font-size: 12px">
+                                            @Convert.ToDateTime(item.DateAbsence).Day / @Convert.ToDateTime(item.DateAbsence).Month / @Convert.ToDateTime(item.DateAbsence).Year
+                                        </th>
+                                        <th style="width: 120px; border: 1px solid #ccc; font-size: 12px"> <input type="text" id="DeletingId" value="@item.id" hidden /> @item.seance.heure_debut - @item.seance.heure_fin </th>
+
+
+                                        <td class="bg-danger" style="cursor:pointer ; color:white ;width:5px;border: 1px solid #ccc;text-align:center;font-size:15px;font:bold;">
+
+                                            Supprimer
+
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
 
-        </fieldset>
 
 
     </section>
 
 
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+ 
 
 </body>
 
 
 
 </html>
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="/scripts/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/vendor/aos/aos.js"></script>
 <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -141,16 +145,26 @@
 
 <script>
 
-    //
+    //$('#mytable').on('click', 'td', function () {
+    //    alert('clicked');
+    //});
 
-    $("#myTable").on("click", "td", function () {
-        //var x = (this).closest('tr').find('th:first input[id=DeletingId]').val();
-        //alert(x);
-        alert("AAAAAAAAAA");
+
+    $("table tbody td").click(function () {
+        var idDeleting = $(this).closest('tr').find('input[id=DeletingId]').val();
+
+        $.ajax({
+            url: "/Absences/Delete/" + idDeleting,
+            type: "POST",
+            processData: false,
+            contentType: false,
+
+            success: function (data) {
+                location.reload();
+            }
+        });
     });
-    
 
 
-  
 
 </script>

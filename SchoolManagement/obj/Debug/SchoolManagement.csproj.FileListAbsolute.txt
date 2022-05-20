@@ -162,3 +162,6 @@ D:\.Net Projects\SchoolManage\SchoolManagement\obj\Debug\SchoolManagement.csproj
 D:\.Net Projects\SchoolManage\SchoolManagement\obj\Debug\SchoolManagement.csproj.CoreCompileInputs.cache
 D:\.Net Projects\SchoolManage\SchoolManagement\obj\Debug\SchoolManagement.dll
 D:\.Net Projects\SchoolManage\SchoolManagement\obj\Debug\SchoolManagement.pdb
+D:\.Net Projects\SchoolManage\SchoolManagement\bin\BouncyCastle.Crypto.dll
+D:\.Net Projects\SchoolManage\SchoolManagement\bin\itextsharp.dll
+D:\.Net Projects\SchoolManage\SchoolManagement\bin\itextsharp.xml
