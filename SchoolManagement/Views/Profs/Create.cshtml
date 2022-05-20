@@ -64,7 +64,8 @@
                         <h1 style="text-align: left;">Ajout Prof</h1>
 
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" ">
+
 
                         <form>
                             <div class="row mb-4">
@@ -81,8 +82,8 @@
                                         <label class="form-label" for="form3Example2">Name</label>
                                     </div>
                                 </div>
-                            
-       
+
+
 
                             </div>
                             <div class="row mb-4">
@@ -95,7 +96,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="form-outline">
-                                        <input  type="text" id="Adresse" class="form-control" />
+                                        <input type="text" id="Adresse" class="form-control" />
                                         <label class="form-label" for="form3Example2">Adresse</label>
                                     </div>
                                 </div>
@@ -116,7 +117,7 @@
                                         <select class="form-select form-select-lg mb-3" aria-label="Default select example" id="Classe">
                                             <option selected="selected">Choisissez La Matiere </option>
                                             @*ViewBag.filier = db.Filiere.ToList();
-        ViewBag.Groupe = db.Groupe.ToList();*@
+                                ViewBag.Groupe = db.Groupe.ToList();*@
 
                                             @foreach (matiere matiere in ViewBag.matiere)
                                             {
@@ -159,7 +160,7 @@
 
 
 
-                            <button style="font-size:20px;width:200px;" id="SubMitInsertion" class="btn btn-primary btn-block mb-4"> Ajouter Professeur   </button>
+                            <button style="font-size:20px;width:200px;" id="SubMitInsertion" class="btn btn-primary btn-block mb-4"><i class="bi bi-plus-lg"></i> Ajouter    </button>
 
 
 

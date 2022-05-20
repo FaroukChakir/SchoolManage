@@ -200,7 +200,7 @@ namespace SchoolManagement.Controllers
                 Font font = new Font(bf, 20, Font.NORMAL, BaseColor.RED);
 
 
-                PdfPCell cell0 = new PdfPCell(new Phrase("List des Etudiants", font));
+                PdfPCell cell0 = new PdfPCell(new Phrase("List des Professeurs", font));
                 cell0.Colspan = 8;
                 cell0.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
                 cell0.Border = PdfPCell.NO_BORDER;
@@ -268,7 +268,7 @@ namespace SchoolManagement.Controllers
                 pdfDoc.Add(table);
 
                 pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "List Etudiants.pdf");
+                return File(stream.ToArray(), "application/pdf", "List Professeurs.pdf");
             }
         }
 
